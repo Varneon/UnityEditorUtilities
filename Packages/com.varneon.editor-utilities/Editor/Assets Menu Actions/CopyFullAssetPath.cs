@@ -10,9 +10,9 @@ namespace Varneon.EditorUtilities.AssetsMenuActions
         {
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-            if (!string.IsNullOrEmpty(path) && File.Exists(path))
+            if (!string.IsNullOrEmpty(path))
             {
-                EditorGUIUtility.systemCopyBuffer = Path.GetFullPath(path);
+                EditorGUIUtility.systemCopyBuffer = File.Exists(path) ? Path.GetFullPath(path) : path;
             }
         }
     }
