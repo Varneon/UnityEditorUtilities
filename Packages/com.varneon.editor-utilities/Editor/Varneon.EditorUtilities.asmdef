@@ -1,5 +1,5 @@
 {
-    "name": "Varneon.EditorUtilities.ComponentExtensions",
+    "name": "Varneon.EditorUtilities",
     "references": [],
     "includePlatforms": [
         "Editor"
