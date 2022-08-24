@@ -15,5 +15,14 @@ namespace Varneon.EditorUtilities.AssetsMenuActions
                 EditorGUIUtility.systemCopyBuffer = File.Exists(path) ? Path.GetFullPath(path) : path;
             }
         }
+
+        [MenuItem("Assets/Copy GUID", false, 19)]
+        private static void CopyGUID()
+        {
+            if(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(Selection.activeObject, out string guid, out long _))
+            {
+                EditorGUIUtility.systemCopyBuffer = guid;
+            }
+        }
     }
 }
