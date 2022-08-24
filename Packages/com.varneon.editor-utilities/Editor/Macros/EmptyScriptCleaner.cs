@@ -7,7 +7,7 @@ namespace Varneon.EditorUtilities.Macros
     /// <summary>
     /// Simple cleaner for removing empty scripts from hierarchies
     /// </summary>
-    public class EmptyScriptCleaner : Editor
+    public static class EmptyScriptCleaner
     {
         [MenuItem("Varneon/Macros/Delete Empty Scripts")]
         private static void DeleteEmptyScripts()

@@ -7,7 +7,7 @@ namespace Varneon.EditorUtilities.ComponentExtensions
     /// <summary>
     /// Collection of context menu actions for Joints
     /// </summary>
-    public class JointContextMenuActions : Editor
+    public static class JointContextMenuActions
     {
         /// <summary>
         /// Validate the method for setting the joint's connected body to the first rigidbody that can be found in the transform's parents
