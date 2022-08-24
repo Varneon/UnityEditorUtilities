@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Varneon.EditorUtilities.AssetsMenuActions
 {
-    public static class CopyFullAssetPath
+    public static class AssetsMenuActions
     {
         [MenuItem("Assets/Copy Full Path", false, 19)]
         private static void CopyFullPath()
