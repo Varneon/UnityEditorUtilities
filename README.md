@@ -32,6 +32,15 @@ Find the available context menu actions for each component type below:
 | `Set Connected Body To Parent` | Sets the nearest Rigidbody in any parent as connected body of the joint |
 | `Set Connected Body To Child` | Sets the nearest Rigidbody in any child as connected body of the joint |
 
+</details><details>
+<summary>
+
+## `LODGroup`</summary>
+
+| Action | Description |
+| - | - |
+| `Remove Missing Renderers` | Removes missing renderer references from LODGroup. Prevents severe editor [errors](https://github.com/Varneon/UnityEditorUtilities/issues/10) |
+
 </details>
 
 ---
