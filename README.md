@@ -1,7 +1,7 @@
 # Varneon's Unity Editor Utilities
 Collection of useful Unity Editor utilities ranging from small macros to full toolkits
 
-### [Import Instructions](#import-instructions-1)
+### [Installation Instructions](#installation)
 
 ---
 
@@ -51,30 +51,32 @@ Context menu actions available for different types of components
 
 ---
 
-# Import Instructions
+# Installation
 
 <details><summary>
 
-## Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
+### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
 
-> 1. Navigate to your toolbar: `Window` > `Package Manager` > `[+]` > `Add package from git URL...` and paste in: `https://github.com/Varneon/UnityEditorUtilities.git`
-
-</details><details><summary>
-
-## Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
-
-> 1. Download latest Unity Editor Utilities from [here](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
-> 2. Import the downloaded .unitypackage into your Unity project
-
-</details><details><summary>
-
-## Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
-
-> 1. Download the the repository's .zip [here](https://github.com/Varneon/UnityEditorUtilities/archive/refs/heads/main.zip)
+> 1. Download `com.varneon.editor-utilities.zip` from [here](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
 > 2. Unpack the .zip somewhere
 > 3. In VRChat Creator Companion, navigate to `Settings` > `User Packages` > `Add`
-> 4. Navigate to the unpacked folder, `com.varneon.editor-utilities` and click `Select Folder`
+> 4. Navigate to the unpacked folder, `com.varneon.vudon.repository-template` and click `Select Folder`
 > 5. `Varneon's Editor Utilities` should now be visible under `Local User Packages` in the project view in VRChat Creator Companion
+> 6. Click `Add`
+
+</details><details><summary>
+
+### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
+
+> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
+> 2. Copy and paste the following link into the URL input field: <pre lang="md">https://github.com/Varneon/UnityEditorUtilities.git?path=/Packages/com.varneon.editor-utilities</pre>
+
+</details><details><summary>
+
+### Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
+
+> 1. Download latest `com.varneon.editor-utilities.unitypackage` from [here](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
+> 2. Import the downloaded .unitypackage into your Unity project
 
 </details>
 
