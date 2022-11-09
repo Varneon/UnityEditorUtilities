@@ -1,4 +1,5 @@
-# Varneon's Unity Editor Utilities
+# Varneon's Unity Editor Utilities [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/UnityEditorUtilities?style=flat&label=Stars)](https://github.com/Varneon/UnityEditorUtilities/stargazers) [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/UnityEditorUtilities/total?color=blue&label=Downloads&style=flat)](https://github.com/Varneon/UnityEditorUtilities/releases) [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/UnityEditorUtilities?color=blue&label=Release&sort=semver&style=flat)](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
+
 Collection of useful Unity Editor utilities ranging from small macros to full toolkits
 
 ### [Installation Instructions](#installation)
