@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Varneon.EditorUtilities.ComponentExtensions
 {
     /// <summary>
-    /// Collection of context menu actions for Joints
+    /// Collection of context menu actions for LODGroups
     /// </summary>
     public static class LODGroupContextMenuActions
     {
