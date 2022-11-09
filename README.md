@@ -8,19 +8,25 @@ Collection of useful Unity Editor utilities ranging from small macros to full to
 # Features
 
 ## Asset Menu Actions
+
+Context menu actions available in the Unity Editor's `Project` window
+
 | Action | Description | Path |
 | - | - | - |
 | `Copy Full Path` | Copies the full path of an asset instead of the relative asset database path | `Assets/Copy Full Path` |
 | `Copy GUID` | Copies the GUID of an asset | `Assets/Copy GUID` |
 
 ## Macros
+
+Menu actions available in the Unity Editor's toolbar at `Varneon` > `Macros`
+
 | Macro | Description | Path |
 | - | - | - |
 | `Delete Empty Scripts` | Deletes all empty scripts in a hierarchy | `Varneon/Macros/Delete Empty Scripts` |
 
 ## Context Menu Actions
 
-Find the available context menu actions for each component type below:
+Context menu actions available for different types of components
 
 <details>
 <summary>
