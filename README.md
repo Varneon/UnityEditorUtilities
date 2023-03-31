@@ -39,6 +39,15 @@ Context menu actions available for different types of components
 <details>
 <summary>
 
+## `MonoBehaviour`</summary>
+
+| Action | Description |
+| - | - |
+| `Select Script` | Selects the source script of the MonoBehaviour |
+
+</details><details>
+<summary>
+
 ## `Joint`</summary>
 
 | Action | Description |
