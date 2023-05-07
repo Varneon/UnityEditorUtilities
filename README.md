@@ -39,6 +39,15 @@ Context menu actions available for different types of components
 <details>
 <summary>
 
+## `Component`</summary>
+
+| Action | Description |
+| - | - |
+| `Find Components Of Type In Scene` | Finds all components of type in scene |
+
+</details><details>
+<summary>
+
 ## `MonoBehaviour`</summary>
 
 | Action | Description |
