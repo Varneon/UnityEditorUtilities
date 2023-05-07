@@ -17,6 +17,13 @@ Context menu actions available in the Unity Editor's `Project` window
 | `Copy Full Path` | Copies the full path of an asset instead of the relative asset database path | `Assets/Copy Full Path` |
 | `Copy GUID` | Copies the GUID of an asset | `Assets/Copy GUID` |
 
+## Hierarchy Menu Actions
+
+| Action | Description | Path |
+| - | - | - |
+| `Create Parent Proxy` | Creates a new parent proxy object for the selected object | `GameObject/Create Parent Proxy` |
+| `Select Dependencies` | Selects all dependencies of the selected GameObjects | `GameObject/Select Dependencies` |
+
 ## Macros
 
 Menu actions available in the Unity Editor's toolbar at `Varneon` > `Macros`
@@ -30,6 +37,24 @@ Menu actions available in the Unity Editor's toolbar at `Varneon` > `Macros`
 Context menu actions available for different types of components
 
 <details>
+<summary>
+
+## `Component`</summary>
+
+| Action | Description |
+| - | - |
+| `Find Components Of Type In Scene` | Finds all components of type in scene |
+
+</details><details>
+<summary>
+
+## `MonoBehaviour`</summary>
+
+| Action | Description |
+| - | - |
+| `Select Script` | Selects the source script of the MonoBehaviour |
+
+</details><details>
 <summary>
 
 ## `Joint`</summary>

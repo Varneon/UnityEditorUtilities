@@ -1,6 +1,6 @@
 {
   "name": "com.varneon.editor-utilities",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "displayName": "Varneon's Editor Utilities",
   "description": "Collection of useful Unity Editor utilities ranging from small macros to full toolkits",
   "author": {

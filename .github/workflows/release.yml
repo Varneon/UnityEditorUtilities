@@ -2,9 +2,6 @@ name: Build Release
 
 on: 
   workflow_dispatch:
-  push:
-    branches: main
-    paths: Packages/com.varneon.editor-utilities/**
 
 env:
   packageName: "com.varneon.editor-utilities"
@@ -51,6 +48,7 @@ jobs:
         uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
         with:
           tag_name: ${{ steps.version.outputs.prop }}
+          draft: true
           files: |
             ${{ env.zipFile }}
             ${{ env.unityPackage }}

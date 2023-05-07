@@ -12,11 +12,11 @@ namespace Varneon.EditorUtilities.Macros
         [MenuItem("Varneon/Macros/Delete Empty Scripts")]
         private static void DeleteEmptyScripts()
         {
-            Transform selectedTransform = Selection.activeTransform;
+            Transform[] selectedTransforms = Selection.transforms;
 
-            if(selectedTransform == null) { EditorUtility.DisplayDialog("No active selected GameObject", "Please select the root GameObject for deleting the empty scripts first!", "OK"); return; }
+            if(selectedTransforms.Length == 0) { EditorUtility.DisplayDialog("No active selected GameObject", "Please select the root GameObject for deleting the empty scripts first!", "OK"); return; }
 
-            Component[] components = selectedTransform.GetComponentsInChildren<Component>(true).Where(c => c == null).ToArray();
+            Component[] components = selectedTransforms.SelectMany(t => t.GetComponentsInChildren<Component>(true)).Where(c => c == null).ToArray();
 
             if (components.Length == 0) { EditorUtility.DisplayDialog("No empty scripts found", "Couldn't find any empty scripts under the selected GameObject!", "OK"); return; }
 
@@ -24,7 +24,7 @@ namespace Varneon.EditorUtilities.Macros
             {
                 Undo.RegisterCompleteObjectUndo(Selection.activeGameObject, "Delete empty scripts");
 
-                foreach (Transform t in selectedTransform.GetComponentsInChildren<Transform>(true))
+                foreach (Transform t in selectedTransforms.SelectMany(t => t.GetComponentsInChildren<Transform>(true)))
                 {
                     GameObjectUtility.RemoveMonoBehavioursWithMissingScript(t.gameObject);
                 }
