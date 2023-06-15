@@ -23,6 +23,7 @@ Context menu actions available in the Unity Editor's `Project` window
 | - | - | - |
 | `Create Parent Proxy` | Creates a new parent proxy object for the selected object | `GameObject/Create Parent Proxy` |
 | `Select Dependencies` | Selects all dependencies of the selected GameObjects | `GameObject/Select Dependencies` |
+| `Select Components Of Type` | Selects all children with specified type of component on them | `GameObject/Select All Components Of Type` |
 
 ## Macros
 
