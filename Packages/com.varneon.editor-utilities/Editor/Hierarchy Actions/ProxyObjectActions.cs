@@ -8,6 +8,9 @@ namespace Varneon.EditorUtilities.HierarchyActions
     /// </summary>
     public static class ProxyObjectActions
     {
+        // 'Create Empty Parent' was introduced in 2020.2
+        // https://docs.unity3d.com/2020.2/Documentation/Manual/Hierarchy.html
+#if !UNITY_2020_2_OR_NEWER
         /// <summary>
         /// Creates a new proxy parent object for the selected object(s)
         /// </summary>
@@ -39,6 +42,7 @@ namespace Varneon.EditorUtilities.HierarchyActions
             // Parent the original object to the new proxy with undo
             Undo.SetTransformParent(contextTransform, newProxyTransform, "Parent object to proxy");
         }
+#endif
     }
 }
 
