@@ -34,7 +34,7 @@ namespace Varneon.EditorUtilities.HierarchyActions
             void ShowTypeSelectionDropdown(int instanceID, Rect selectionRect)
             {
                 // Find all component types in the selected hierarchy
-                HashSet<Type> types = new HashSet<Type>(Selection.gameObjects.SelectMany(go => go.GetComponentsInChildren<Component>(true)).Select(c => c.GetType()));
+                HashSet<Type> types = new HashSet<Type>(Selection.gameObjects.SelectMany(go => go.GetComponentsInChildren<Component>(true)).Select(c => c.GetType()).OrderBy(t => t.Name));
 
                 GenericMenu menu = new GenericMenu();
 
