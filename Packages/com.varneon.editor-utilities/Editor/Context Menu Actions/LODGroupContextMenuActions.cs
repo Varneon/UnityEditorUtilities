@@ -36,14 +36,15 @@ namespace Varneon.EditorUtilities.ComponentExtensions
             lodGroup.SetLODs(lodGroup.GetLODs().Select(l => new LOD(l.screenRelativeTransitionHeight, l.renderers.Where(r => r != null).ToArray())).ToArray());
         }
 
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/0", validate = true)] private static bool ValidateSelectLODRenderers0() => ValidateLODGroupHasEnoughLevels(1);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/1", validate = true)] private static bool ValidateSelectLODRenderers1() => ValidateLODGroupHasEnoughLevels(2);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/2", validate = true)] private static bool ValidateSelectLODRenderers2() => ValidateLODGroupHasEnoughLevels(3);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/3", validate = true)] private static bool ValidateSelectLODRenderers3() => ValidateLODGroupHasEnoughLevels(4);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/4", validate = true)] private static bool ValidateSelectLODRenderers4() => ValidateLODGroupHasEnoughLevels(5);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/5", validate = true)] private static bool ValidateSelectLODRenderers5() => ValidateLODGroupHasEnoughLevels(6);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/6", validate = true)] private static bool ValidateSelectLODRenderers6() => ValidateLODGroupHasEnoughLevels(7);
-        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/7", validate = true)] private static bool ValidateSelectLODRenderers7() => ValidateLODGroupHasEnoughLevels(8);
+        #region Select Renderers At LOD
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/0", validate = true)] private static bool ValidateSelectLODRenderers0() => ValidateSelectedLODGroupsHaveEnoughLevels(1);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/1", validate = true)] private static bool ValidateSelectLODRenderers1() => ValidateSelectedLODGroupsHaveEnoughLevels(2);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/2", validate = true)] private static bool ValidateSelectLODRenderers2() => ValidateSelectedLODGroupsHaveEnoughLevels(3);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/3", validate = true)] private static bool ValidateSelectLODRenderers3() => ValidateSelectedLODGroupsHaveEnoughLevels(4);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/4", validate = true)] private static bool ValidateSelectLODRenderers4() => ValidateSelectedLODGroupsHaveEnoughLevels(5);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/5", validate = true)] private static bool ValidateSelectLODRenderers5() => ValidateSelectedLODGroupsHaveEnoughLevels(6);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/6", validate = true)] private static bool ValidateSelectLODRenderers6() => ValidateSelectedLODGroupsHaveEnoughLevels(7);
+        [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/7", validate = true)] private static bool ValidateSelectLODRenderers7() => ValidateSelectedLODGroupsHaveEnoughLevels(8);
         [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/0")] private static void SelectLODRenderers0() => SelectLODRenderers(0);
         [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/1")] private static void SelectLODRenderers1() => SelectLODRenderers(1);
         [MenuItem("CONTEXT/LODGroup/Select Renderers At LOD/2")] private static void SelectLODRenderers2() => SelectLODRenderers(2);
@@ -58,7 +59,7 @@ namespace Varneon.EditorUtilities.ComponentExtensions
         /// </summary>
         /// <param name="minLevels">Minimum number of LOD levels to satisfy this check.</param>
         /// <returns>Does the LODGroup have enough LOD levels.</returns>
-        private static bool ValidateLODGroupHasEnoughLevels(int minLevels)
+        private static bool ValidateSelectedLODGroupsHaveEnoughLevels(int minLevels)
         {
             return Selection.gameObjects.SelectMany(g => g.GetComponents<LODGroup>()).Min(l => l.lodCount) >= minLevels;
         }
