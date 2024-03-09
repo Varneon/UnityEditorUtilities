@@ -84,12 +84,7 @@ Context menu actions available for different types of components
 
 ### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
 
-> 1. Download `com.varneon.editor-utilities.zip` from [here](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
-> 2. Unpack the .zip somewhere
-> 3. In VRChat Creator Companion, navigate to `Settings` > `User Packages` > `Add`
-> 4. Navigate to the unpacked folder, `com.varneon.vudon.repository-template` and click `Select Folder`
-> 5. `Varneon's Editor Utilities` should now be visible under `Local User Packages` in the project view in VRChat Creator Companion
-> 6. Click `Add`
+> Coming Soon™
 
 </details><details><summary>
 
