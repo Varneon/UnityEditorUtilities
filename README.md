@@ -73,6 +73,7 @@ Context menu actions available for different types of components
 | Action | Description |
 | - | - |
 | `Remove Missing Renderers` | Removes missing renderer references from LODGroup. Prevents severe editor [errors](https://github.com/Varneon/UnityEditorUtilities/issues/10) |
+| `Select Renderers At LOD` | Selects all Renderers on specified LOD level across all selected LODGroups |
 
 </details>
 
