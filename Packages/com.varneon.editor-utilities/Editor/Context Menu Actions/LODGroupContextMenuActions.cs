@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +10,18 @@ namespace Varneon.EditorUtilities.ComponentExtensions
     /// </summary>
     public static class LODGroupContextMenuActions
     {
+        private static readonly string[] LODSuffixes = new string[]
+        {
+            "LOD0",
+            "LOD1",
+            "LOD2",
+            "LOD3",
+            "LOD4",
+            "LOD5",
+            "LOD6",
+            "LOD7"
+        };
+
         /// <summary>
         /// Gets all selected LODGroups.
         /// </summary>
@@ -20,6 +31,7 @@ namespace Varneon.EditorUtilities.ComponentExtensions
             return Selection.gameObjects.Select(go => go.GetComponent<LODGroup>()).Where(l => l != null).ToArray();
         }
 
+        #region Remove Missing Renderers
         /// <summary>
         /// Validate the method for removing missing renderer references from LODGroup
         /// </summary>
@@ -45,6 +57,177 @@ namespace Varneon.EditorUtilities.ComponentExtensions
             Undo.RecordObject(lodGroup, "Remove missing LODGroup renderers");
 
             lodGroup.SetLODs(lodGroup.GetLODs().Select(l => new LOD(l.screenRelativeTransitionHeight, l.renderers.Where(r => r != null).ToArray())).ToArray());
+        }
+        #endregion
+
+        #region Append Unassigned LOD Renderers
+        private struct LODGroupManifest
+        {
+            internal LODGroup LODGroup;
+
+            internal Dictionary<int, Renderer[]> UnassingedRenderers;
+
+            internal int LowestUnassignedLODLevel;
+        }
+
+        private static Dictionary<LODGroup, LODGroupManifest> lodGroupManifests;
+
+        private static bool validationCooldownActive;
+
+        [MenuItem("CONTEXT/LODGroup/Append Unassigned LOD Renderers (Experimental)", validate = true)]
+        private static bool ValidateAppendUnassignedLODRenderers()
+        {
+            if (!validationCooldownActive)
+            {
+                lodGroupManifests = new Dictionary<LODGroup, LODGroupManifest>();
+
+                validationCooldownActive = true;
+
+                EditorApplication.delayCall += () => validationCooldownActive = false;
+
+                return GetSelectedLODGroups().Count(l => CheckIfHasUnassignedLODRenderers(l)) > 0;
+            }
+
+            return lodGroupManifests.Count > 0;
+        }
+
+        [MenuItem("CONTEXT/LODGroup/Append Unassigned LOD Renderers (Experimental)")]
+        private static void AppendUnassignedLODRenderers()
+        {
+            foreach(LODGroup lodGroup in lodGroupManifests.Keys)
+            {
+                AppendUnassignedLODRenderers(lodGroup);
+            }
+        }
+
+        private static void AppendUnassignedLODRenderers(LODGroup lodGroup)
+        {
+            if (lodGroup == null) { return; }
+
+            // Get all of the existing LODs
+            List<LOD> lods = new List<LOD>(lodGroup.GetLODs());
+
+            // Cache the original number of LOD levels
+            int existingLODCount = lodGroup.lodCount;
+
+            LODGroupManifest manifest = lodGroupManifests[lodGroup];
+
+            // Cache the new LOD count
+            int newLODCount = Mathf.Max(existingLODCount, manifest.LowestUnassignedLODLevel + 1);
+
+            // Iterate the known maximum resulting number of LOD levels
+            for (int i = 0; i < newLODCount; i++)
+            {
+                // Check if this LOD exceeds the existing number of LOD in the LODGroup
+                bool countExceeded = i >= existingLODCount;
+
+                // Create new LOD or get the existing one
+                LOD lod = countExceeded ? new LOD() : lods[i];
+
+                string suffix = LODSuffixes[i];
+
+                // If the scan results indicate this LOD to not have missing renderers, continue to next one
+                if (!manifest.UnassingedRenderers.ContainsKey(i))
+                {
+                    // If this LOD is exceeding the existing ones, add the empty LOD level to ensure consistency,
+                    // otherwise e.g. LOD4 renderer could end up in LOD2 if there are no LOD2 and LOD3 renderers
+                    if (countExceeded) { lods.Add(lod); }
+
+                    continue;
+                }
+
+                // Get all found renderers with matching LOD suffix
+                IEnumerable<Renderer> lodRenderers = manifest.UnassingedRenderers[i].Where(r => r.name.EndsWith(suffix));
+
+                // If this LOD exceeds existing ones, add the new one to the list
+                if (countExceeded)
+                {
+                    lod.renderers = lodRenderers.ToArray();
+
+                    lods.Add(lod);
+                }
+                else // If this LOD already exists, union the existing renderers with found unassigned ones and override
+                {
+                    lod.renderers = lods[i].renderers.Union(lodRenderers).ToArray();
+
+                    lods[i] = lod;
+                }
+            }
+
+            // Iterate through the newly added LODs to ensure continuation of the transition heights
+            for (int i = existingLODCount; i < newLODCount; i++)
+            {
+                LOD lod = lods[i];
+
+                // Set the transition height to half of the previous LOD's height
+                lod.screenRelativeTransitionHeight = lods[i - 1].screenRelativeTransitionHeight / 2f;
+
+                lods[i] = lod;
+            }
+
+            Undo.RecordObject(lodGroup, "Append Unassigned LOD Renderers");
+
+            // Apply the edited LODs back to the LODGroup
+            lodGroup.SetLODs(lods.ToArray());
+        }
+        #endregion
+
+        /// <summary>
+        /// Check if LODGroup's hierarchy has any LOD renderers which have not been assigned to the LODGroup.
+        /// </summary>
+        /// <param name="lodGroup">LODGroup to validate</param>
+        /// <returns>Has any of the child LOD Renderers not been assigned to the LODGroup.</returns>
+        private static bool CheckIfHasUnassignedLODRenderers(LODGroup lodGroup)
+        {
+            Renderer[] foundRenderers = lodGroup.GetComponentsInChildren<Renderer>(true);
+
+            LOD[] lods = lodGroup.GetLODs();
+
+            Dictionary<int, Renderer[]> unassignedRenderers = new Dictionary<int, Renderer[]>();
+
+            int lowestUnassignedLODLevel = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                string lodName = LODSuffixes[i];
+
+                IEnumerable<Renderer> allLODRenderers = foundRenderers.Where(r => r.name.EndsWith(lodName));
+
+                if(allLODRenderers.Count() == 0) { continue; }
+
+                lowestUnassignedLODLevel = i;
+
+                if (i >= lodGroup.lodCount)
+                {
+                    unassignedRenderers.Add(i, allLODRenderers.ToArray());
+                }
+                else
+                {
+                    Renderer[] lodRenderers = lods[i].renderers;
+
+                    IEnumerable<Renderer> unassignedLODRenderers = allLODRenderers.Where(r => !lodRenderers.Contains(r));
+
+                    if(unassignedLODRenderers.Count() == 0) { continue; }
+
+                    unassignedRenderers.Add(i, unassignedLODRenderers.ToArray());
+                }
+            }
+
+            bool containsUnassignedRenderers = unassignedRenderers.Count > 0;
+
+            if (containsUnassignedRenderers)
+            {
+                LODGroupManifest manifest = new LODGroupManifest()
+                {
+                    LODGroup = lodGroup,
+                    UnassingedRenderers = unassignedRenderers,
+                    LowestUnassignedLODLevel = lowestUnassignedLODLevel
+                };
+
+                lodGroupManifests.Add(lodGroup, manifest);
+            }
+
+            return containsUnassignedRenderers;
         }
 
         #region Select Renderers At LOD
@@ -99,5 +282,6 @@ namespace Varneon.EditorUtilities.ComponentExtensions
             // Disable cooldown for this method on the next update
             EditorApplication.delayCall += () => lodRendererSelectionCooldownActive = false;
         }
+        #endregion
     }
 }
