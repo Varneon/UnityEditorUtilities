@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +11,15 @@ namespace Varneon.EditorUtilities.ComponentExtensions
     /// </summary>
     public static class LODGroupContextMenuActions
     {
+        /// <summary>
+        /// Gets all selected LODGroups.
+        /// </summary>
+        /// <returns>All selected LODGroups</returns>
+        private static LODGroup[] GetSelectedLODGroups()
+        {
+            return Selection.gameObjects.Select(go => go.GetComponent<LODGroup>()).Where(l => l != null).ToArray();
+        }
+
         /// <summary>
         /// Validate the method for removing missing renderer references from LODGroup
         /// </summary>
@@ -61,7 +72,7 @@ namespace Varneon.EditorUtilities.ComponentExtensions
         /// <returns>Does the LODGroup have enough LOD levels.</returns>
         private static bool ValidateSelectedLODGroupsHaveEnoughLevels(int minLevels)
         {
-            return Selection.gameObjects.SelectMany(g => g.GetComponents<LODGroup>()).Min(l => l.lodCount) >= minLevels;
+            return GetSelectedLODGroups().Min(l => l.lodCount) >= minLevels;
         }
 
         /// <summary>
