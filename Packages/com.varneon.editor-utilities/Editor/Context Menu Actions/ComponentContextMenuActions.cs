@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using static UnityEditor.SearchableEditorWindow;
 
@@ -12,6 +13,7 @@ namespace Varneon.EditorUtilities.ComponentExtensions
     /// </summary>
     public static class ComponentContextMenuActions
     {
+        #region Find Components Of Type In Scene
         /// <summary>
         /// Type of the editor's SceneHierarchyWindow
         /// </summary>
@@ -51,5 +53,30 @@ namespace Varneon.EditorUtilities.ComponentExtensions
                 Debug.LogException(e);
             }
         }
+        #endregion
+
+        #region Cut Component
+        /// <summary>
+        /// Ensure that the user isn't trying to cut a Transform component which is required at all times
+        /// </summary>
+        [MenuItem("CONTEXT/Component/Cut Component", true, 500)]
+        private static bool ValidateCutComponent(MenuCommand command)
+        {
+            return command.context.GetType() != typeof(Transform);
+        }
+
+        /// <summary>
+        /// Shortcut menu item for copying and removing a Component
+        /// </summary>
+        [MenuItem("CONTEXT/Component/Cut Component", false, 500)]
+        private static void CutComponent(MenuCommand command)
+        {
+            Component c = command.context as Component;
+
+            ComponentUtility.CopyComponent(c);
+
+            Undo.DestroyObjectImmediate(c);
+        }
+        #endregion
     }
 }
