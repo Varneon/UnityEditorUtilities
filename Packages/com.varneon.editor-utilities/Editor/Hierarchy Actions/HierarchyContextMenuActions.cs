@@ -13,6 +13,16 @@ namespace Varneon.EditorUtilities.HierarchyActions
     public static class HierarchyContextMenuActions
     {
         /// <summary>
+        /// Validate that any GameObject has been selected in the scene
+        /// </summary>
+        [MenuItem("GameObject/Select Dependencies", true, 11)]
+        [MenuItem("GameObject/Select All Components Of Type", true, 11)]
+        private static bool ValidateAnyGameObjectSelected()
+        {
+            return Selection.gameObjects.Length > 0;
+        }
+
+        /// <summary>
         /// Select dependencies of the selected GameObjects
         /// </summary>
         [MenuItem("GameObject/Select Dependencies", false, 11)]

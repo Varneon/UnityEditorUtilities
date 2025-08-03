@@ -12,6 +12,15 @@ namespace Varneon.EditorUtilities.HierarchyActions
         // https://docs.unity3d.com/2020.2/Documentation/Manual/Hierarchy.html
 #if !UNITY_2020_2_OR_NEWER
         /// <summary>
+        /// Validate that any GameObject has been selected in the scene
+        /// </summary>
+        [MenuItem("GameObject/Create Parent Proxy", true, 0)]
+        private static bool ValidateAnyGameObjectSelected()
+        {
+            return Selection.gameObjects.Length > 0;
+        }
+
+        /// <summary>
         /// Creates a new proxy parent object for the selected object(s)
         /// </summary>
         /// <param name="command"></param>
