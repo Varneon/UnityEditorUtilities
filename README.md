@@ -44,6 +44,7 @@ Context menu actions available for different types of components
 
 | Action | Description |
 | - | - |
+| `Cut Component` | Copies and Removes a Component |
 | `Find Components Of Type In Scene` | Finds all components of type in scene |
 
 </details><details>
