@@ -75,7 +75,14 @@ namespace Varneon.EditorUtilities.ComponentExtensions
 
             ComponentUtility.CopyComponent(c);
 
-            Undo.DestroyObjectImmediate(c);
+            if(UtilityMethods.IsComponentRequired(c.gameObject, c, out Component rc))
+            {
+                EditorUtility.DisplayDialog("Can't remove component", string.Format("Can't remove {0} because {1} depends on it", c.GetType().Name, rc.GetType().Name), "Ok");
+            }
+            else
+            {
+                Undo.DestroyObjectImmediate(c);
+            }
         }
         #endregion
     }
