@@ -1,5 +1,6 @@
 {
     "name": "Varneon.EditorUtilities.Editor",
+    "rootNamespace": "Varneon.EditorUtilities",
     "references": [],
     "includePlatforms": [
         "Editor"
