@@ -35,49 +35,35 @@ Menu actions available in the Unity Editor's toolbar at `Varneon` > `Macros`
 
 ## Context Menu Actions
 
-Context menu actions available for different types of components
+Context menu actions available for different types of components. These can be accessed by right-clicking the Component header or clicking the 3 dots on the right side of the Component header.
 
-<details>
-<summary>
-
-## `Component`</summary>
+### `Component`
 
 | Action | Description |
 | - | - |
 | `Cut Component` | Copies and Removes a Component |
 | `Find Components Of Type In Scene` | Finds all components of type in scene |
 
-</details><details>
-<summary>
-
-## `MonoBehaviour`</summary>
+### `MonoBehaviour`
 
 | Action | Description |
 | - | - |
 | `Select Script` | Selects the source script of the MonoBehaviour |
 
-</details><details>
-<summary>
-
-## `Joint`</summary>
+### `Joint`</summary>
 
 | Action | Description |
 | - | - |
 | `Set Connected Body To Parent` | Sets the nearest Rigidbody in any parent as connected body of the joint |
 | `Set Connected Body To Child` | Sets the nearest Rigidbody in any child as connected body of the joint |
 
-</details><details>
-<summary>
-
-## `LODGroup`</summary>
+### `LODGroup`
 
 | Action | Description |
 | - | - |
 | `Remove Missing Renderers` | Removes missing renderer references from LODGroup. Prevents severe editor [errors](https://github.com/Varneon/UnityEditorUtilities/issues/10) |
 | `Select Renderers At LOD` | Selects all Renderers on specified LOD level across all selected LODGroups |
 | `Append Unassigned LOD Renderers` | Appends all unassigned LOD renderers found in children of the LODGroup _(Can skip levels, resulting in empty LODs)_ |
-
-</details>
 
 ---
 
