@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 namespace Varneon.EditorUtilities.HierarchyActions
 {
     /// <summary>
-    /// Collection of hierarchy context menu actions for creating proxy objects
+    /// Collection of hierarchy context menu actions
     /// </summary>
     public static class HierarchyContextMenuActions
     {
