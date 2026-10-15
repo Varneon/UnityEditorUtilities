@@ -8,10 +8,20 @@ using Object = UnityEngine.Object;
 namespace Varneon.EditorUtilities.HierarchyActions
 {
     /// <summary>
-    /// Collection of hierarchy context menu actions for creating proxy objects
+    /// Collection of hierarchy context menu actions
     /// </summary>
     public static class HierarchyContextMenuActions
     {
+        /// <summary>
+        /// Validate that any GameObject has been selected in the scene
+        /// </summary>
+        [MenuItem("GameObject/Select Dependencies", true, 11)]
+        [MenuItem("GameObject/Select All Components Of Type", true, 11)]
+        private static bool ValidateAnyGameObjectSelected()
+        {
+            return Selection.gameObjects.Length > 0;
+        }
+
         /// <summary>
         /// Select dependencies of the selected GameObjects
         /// </summary>
@@ -34,7 +44,7 @@ namespace Varneon.EditorUtilities.HierarchyActions
             void ShowTypeSelectionDropdown(int instanceID, Rect selectionRect)
             {
                 // Find all component types in the selected hierarchy
-                HashSet<Type> types = new HashSet<Type>(Selection.gameObjects.SelectMany(go => go.GetComponentsInChildren<Component>(true)).Select(c => c.GetType()));
+                HashSet<Type> types = new HashSet<Type>(Selection.gameObjects.SelectMany(go => go.GetComponentsInChildren<Component>(true)).Select(c => c.GetType()).OrderBy(t => t.Name));
 
                 GenericMenu menu = new GenericMenu();
 

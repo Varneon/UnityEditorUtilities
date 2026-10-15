@@ -35,79 +35,60 @@ Menu actions available in the Unity Editor's toolbar at `Varneon` > `Macros`
 
 ## Context Menu Actions
 
-Context menu actions available for different types of components
+Context menu actions available for different types of components. These can be accessed by right-clicking the Component header or clicking the 3 dots on the right side of the Component header.
 
-<details>
-<summary>
-
-## `Component`</summary>
+### `Component`
 
 | Action | Description |
 | - | - |
+| `Cut Component` | Copies and Removes a Component |
 | `Find Components Of Type In Scene` | Finds all components of type in scene |
 
-</details><details>
-<summary>
-
-## `MonoBehaviour`</summary>
+### `MonoBehaviour`
 
 | Action | Description |
 | - | - |
 | `Select Script` | Selects the source script of the MonoBehaviour |
 
-</details><details>
-<summary>
-
-## `Joint`</summary>
+### `Joint`</summary>
 
 | Action | Description |
 | - | - |
 | `Set Connected Body To Parent` | Sets the nearest Rigidbody in any parent as connected body of the joint |
 | `Set Connected Body To Child` | Sets the nearest Rigidbody in any child as connected body of the joint |
 
-</details><details>
-<summary>
-
-## `LODGroup`</summary>
+### `LODGroup`
 
 | Action | Description |
 | - | - |
 | `Remove Missing Renderers` | Removes missing renderer references from LODGroup. Prevents severe editor [errors](https://github.com/Varneon/UnityEditorUtilities/issues/10) |
-
-</details>
+| `Select Renderers At LOD` | Selects all Renderers on specified LOD level across all selected LODGroups |
+| `Append Unassigned LOD Renderers` | Appends all unassigned LOD renderers found in children of the LODGroup _(Can skip levels, resulting in empty LODs)_ |
 
 ---
 
 # Installation
 
-<details><summary>
+### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages)
 
-### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
+> https://vpm.varneon.com/
 
-> Coming Soon™
-
-</details><details><summary>
-
-### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
-
-> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
-> 2. Copy and paste the following link into the URL input field: <pre lang="md">https://github.com/Varneon/UnityEditorUtilities.git?path=/Packages/com.varneon.editor-utilities</pre>
-
-</details><details><summary>
-
-### Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
+### Import from [Unitypackage](https://docs.unity3d.com/2022.3/Documentation/Manual/AssetPackagesImport.html)
 
 > 1. Download latest `com.varneon.editor-utilities.unitypackage` from [here](https://github.com/Varneon/UnityEditorUtilities/releases/latest)
 > 2. Import the downloaded .unitypackage into your Unity project
 
-</details>
+### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2022.3/Documentation/Manual/upm-ui-giturl.html)
+
+> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
+> 2. Copy and paste the following link into the URL input field: <pre lang="md">https://github.com/Varneon/UnityEditorUtilities.git?path=/Packages/com.varneon.editor-utilities</pre>
 
 <div align="center">
 
 ## Developed by Varneon with :hearts:
 
-![Twitter Follow](https://img.shields.io/twitter/follow/Varneon?color=%231c9cea&label=%40Varneon&logo=Twitter&style=for-the-badge)
-![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCKTxeXy7gyaxr-YA9qGWOYg?color=%23FF0000&label=Varneon&logo=YouTube&style=for-the-badge)
-![GitHub followers](https://img.shields.io/github/followers/Varneon?color=%23303030&label=Varneon&logo=GitHub&style=for-the-badge)
+[![Twitter Follow](https://img.shields.io/static/v1?style=for-the-badge&label=@Varneon&message=8.4K&color=1b9df0&logo=x)](https://x.com/Varneon)
+[![YouTube Channel Subscribers](https://img.shields.io/static/v1?style=for-the-badge&label=@Varneon&message=1.4K&color=%23FF0000&logo=YouTube)](https://www.youtube.com/Varneon)
+[![GitHub followers](https://img.shields.io/github/followers/Varneon?color=%23303030&label=Varneon&logo=GitHub&style=for-the-badge)](https://github.com/Varneon)
 
 </div>
