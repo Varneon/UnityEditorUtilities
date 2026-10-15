@@ -42,6 +42,7 @@ Context menu actions available for different types of components. These can be a
 | Action | Description |
 | - | - |
 | `Cut Component` | Copies and Removes a Component |
+| `Duplicate Component` | Duplicates a Component |
 | `Find Components Of Type In Scene` | Finds all components of type in scene |
 
 ### `MonoBehaviour`
