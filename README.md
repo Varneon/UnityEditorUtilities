@@ -45,6 +45,12 @@ Context menu actions available for different types of components. These can be a
 | `Duplicate Component` | Duplicates a Component |
 | `Find Components Of Type In Scene` | Finds all components of type in scene |
 
+### `BoxCollider`
+
+| Action | Description |
+| - | - |
+| `Recalculate Bounds` | Encapsulates Renderers in hierarchy with BoxCollider bounds |
+
 ### `MonoBehaviour`
 
 | Action | Description |
