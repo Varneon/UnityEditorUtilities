@@ -85,5 +85,129 @@ namespace Varneon.EditorUtilities.ComponentExtensions
             }
         }
         #endregion
+
+        #region Duplicate Component
+        private static readonly Type[] SingleInstanceNativeComponents = new Type[]
+        {
+            typeof(Transform),
+            #region LAYOUT
+            typeof(RectTransform),
+            typeof(Canvas),
+            typeof(CanvasGroup),
+            #endregion
+            #region MESH
+            typeof(MeshFilter),
+            typeof(MeshRenderer),
+            typeof(SkinnedMeshRenderer),
+            #endregion
+            #region MISCELLANEOUS
+            typeof(Animation),
+            typeof(Animator),
+            typeof(BillboardRenderer),
+            typeof(Grid),
+            typeof(ParticleSystemForceField),
+            typeof(SpriteMask),
+            typeof(UnityEngine.U2D.SpriteShapeRenderer),
+            typeof(Terrain),
+            typeof(WindZone),
+            #endregion
+            #region NAVIGATION
+            typeof(UnityEngine.AI.NavMeshAgent),
+            typeof(UnityEngine.AI.NavMeshObstacle),
+            #endregion
+            #region PHYSICS
+            #if UNITY_2020_1_OR_NEWER
+            typeof(ArticulationBody),
+            #endif
+            typeof(CharacterController),
+            typeof(Cloth),
+            typeof(ConstantForce),
+            typeof(Rigidbody),
+            typeof(TerrainCollider),
+            typeof(WheelCollider),
+            #endregion
+            #region PLAYABLES
+            typeof(UnityEngine.Playables.PlayableDirector),
+            #endregion
+            #region RENDERING
+            typeof(Camera),
+            typeof(CanvasRenderer),
+            typeof(FlareLayer),
+            typeof(LODGroup),
+            typeof(Light),
+            typeof(LightProbeGroup),
+            typeof(LightProbeProxyVolume),
+            typeof(OcclusionArea),
+            typeof(OcclusionPortal),
+            typeof(ReflectionProbe),
+            typeof(UnityEngine.Rendering.SortingGroup),
+            typeof(SpriteRenderer),
+            typeof(StreamingController),
+            #endregion
+            #region TILEMAP
+            typeof(UnityEngine.Tilemaps.Tilemap),
+            typeof(UnityEngine.Tilemaps.TilemapCollider2D),
+            typeof(UnityEngine.Tilemaps.TilemapRenderer),
+            #endregion
+            #region AUDIO
+            typeof(AudioChorusFilter),
+            typeof(AudioDistortionFilter),
+            typeof(AudioEchoFilter),
+            typeof(AudioHighPassFilter),
+            typeof(AudioListener),
+            typeof(AudioLowPassFilter),
+            typeof(AudioReverbFilter),
+            typeof(AudioReverbZone),
+            #endregion
+            #region VISUAL EFFECTS
+            //typeof(Halo)
+            typeof(LensFlare),
+            typeof(LineRenderer),
+            typeof(ParticleSystem),
+            typeof(Projector),
+            typeof(TrailRenderer),
+            typeof(UnityEngine.VFX.VisualEffect)
+            #endregion
+        };
+
+        /// <summary>
+        /// Ensure that the user isn't trying to duplicate a Component that only allows a single instance per GameObject
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [MenuItem("CONTEXT/Component/Duplicate Component", true, 500)]
+        private static bool ValidateDuplicateComponent(MenuCommand command)
+        {
+            Type type = command.context.GetType();
+
+            return !Attribute.IsDefined(command.context.GetType(), typeof(DisallowMultipleComponent)) && !SingleInstanceNativeComponents.Contains(type);
+        }
+
+        /// <summary>
+        /// Shortcut menu item for copying and pasting a Component
+        /// </summary>
+        /// <param name="command"></param>
+        [MenuItem("CONTEXT/Component/Duplicate Component", false, 500)]
+        private static void DuplicateComponent(MenuCommand command)
+        {
+            try
+            {
+                Component c = command.context as Component;
+
+                Undo.RegisterCompleteObjectUndo(c.gameObject, "Duplicate Component");
+
+                ComponentUtility.CopyComponent(c);
+
+                if (!ComponentUtility.PasteComponentAsNew(c.gameObject))
+                {
+                    Debug.LogWarning("Failed to duplicate the component!");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+        }
+        #endregion
     }
 }
