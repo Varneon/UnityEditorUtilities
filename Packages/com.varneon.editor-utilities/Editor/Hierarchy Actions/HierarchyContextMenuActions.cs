@@ -39,9 +39,15 @@ namespace Varneon.EditorUtilities.HierarchyActions
         [MenuItem("GameObject/Select All Components Of Type", false, 11)]
         private static void SelectAllHierarchyComponentsOfType()
         {
+#if UNITY_6000_4_OR_NEWER
+            EditorApplication.hierarchyWindowItemByEntityIdOnGUI += ShowTypeSelectionDropdown;
+
+            void ShowTypeSelectionDropdown(EntityId entityId, Rect selectionRect)
+#else
             EditorApplication.hierarchyWindowItemOnGUI += ShowTypeSelectionDropdown;
 
             void ShowTypeSelectionDropdown(int instanceID, Rect selectionRect)
+#endif
             {
                 // Find all component types in the selected hierarchy
                 HashSet<Type> types = new HashSet<Type>(Selection.gameObjects // Get all selected GameObjects
@@ -72,7 +78,11 @@ namespace Varneon.EditorUtilities.HierarchyActions
                 // Show the menu
                 menu.DropDown(new Rect(Event.current.mousePosition, Vector2.zero));
 
+#if UNITY_6000_4_OR_NEWER
+                EditorApplication.hierarchyWindowItemByEntityIdOnGUI -= ShowTypeSelectionDropdown;
+#else
                 EditorApplication.hierarchyWindowItemOnGUI -= ShowTypeSelectionDropdown;
+#endif
             }
         }
     }
