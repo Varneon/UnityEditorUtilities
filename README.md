@@ -14,7 +14,7 @@ Context menu actions available in the Unity Editor's `Project` window
 
 | Action | Description | Path |
 | - | - | - |
-| `Copy Full Path` | Copies the full path of an asset instead of the relative asset database path | `Assets/Copy Full Path` |
+| `Copy Full Path(s)` | Copies the full path of an asset instead of the relative asset database path | `Assets/Copy Full Path(s)` |
 | `Copy GUID` | Copies the GUID of an asset | `Assets/Copy GUID` |
 
 ## Hierarchy Menu Actions
