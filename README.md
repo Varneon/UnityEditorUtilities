@@ -72,6 +72,12 @@ Context menu actions available for different types of components. These can be a
 | `Select Renderers At LOD` | Selects all Renderers on specified LOD level across all selected LODGroups |
 | `Append Unassigned LOD Renderers` | Appends all unassigned LOD renderers found in children of the LODGroup _(Can skip levels, resulting in empty LODs)_ |
 
+### `NavMeshObstacle`
+
+| Action | Description |
+| - | - |
+| `Recalculate Bounds` | Encapsulates Renderers or Colliders in hierarchy with NavMeshObstacle bounds |
+
 ---
 
 # Installation
